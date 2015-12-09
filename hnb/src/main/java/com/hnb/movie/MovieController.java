@@ -24,7 +24,7 @@ public class MovieController {
 		@RequestMapping("/Movie")
 		public String movie(){
 			logger.info("MovieController : movie()진입");
-			return "movie/Movie";
+			return "movie/Movie.tiles";
 		}
 		@RequestMapping("/movie_info")
 		public Model movieInfo(Model model){
