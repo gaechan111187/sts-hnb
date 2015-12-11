@@ -2,8 +2,7 @@ package com.hnb.movie;
 
 import java.util.List;
 
-
-public interface MovieMapper {
+public interface MovieDAO {
 	public List<MovieVO> selectAll();
 	public List<MovieVO> selectChart();
 	public int insert(MovieVO o);

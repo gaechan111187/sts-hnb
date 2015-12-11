@@ -24,7 +24,7 @@ public class JdbcTest {
 					Constants.ORACLE_PASSWORD);
 				stmt = conn.createStatement();
 				
-				rs = stmt.executeQuery("select * from TEST ");
+				rs = stmt.executeQuery("SELECT NAME FROM MEMBER WHERE ID = 'iu'");
 				String id = null;
 				while (rs.next()) {
 					id = rs.getString("name");

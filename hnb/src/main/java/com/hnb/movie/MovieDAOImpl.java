@@ -13,16 +13,17 @@ import org.springframework.stereotype.Repository;
 import com.hnb.global.Constants;
 import com.hnb.global.DatabaseFactory;
 import com.hnb.global.Vendor;
+import com.hnb.mapper.MovieMapper;
 
 @Repository
-public class MovieDAOImpl implements MovieMapper{
+public class MovieDAOImpl implements MovieDAO{
 	private Connection con;
 	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	private static MovieMapper instance = new MovieDAOImpl();
-	public static MovieMapper getInstance(){
+	private static MovieDAO instance = new MovieDAOImpl();
+	public static MovieDAO getInstance(){
 		return instance;
 	}
 	private MovieDAOImpl(){

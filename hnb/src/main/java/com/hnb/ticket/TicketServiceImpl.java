@@ -13,8 +13,8 @@ public class TicketServiceImpl implements TicketService {
 		return instance;
 	}
 	
-	ScheduleMapper scheduleDAO = ScheduleDAOImpl.getInstance();
-	TicketMapper ticketDAO = TicketDAOImpl.getInstance();
+	ScheduleDAO scheduleDAO = ScheduleDAOImpl.getInstance();
+	TicketDAO ticketDAO = TicketDAOImpl.getInstance();
 	
 	@Override
 	public List<String> getRateList() {

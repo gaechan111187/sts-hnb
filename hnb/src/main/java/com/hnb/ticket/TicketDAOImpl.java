@@ -15,7 +15,7 @@ import com.hnb.global.DatabaseFactory;
 import com.hnb.global.Vendor;
 
 @Repository
-public class TicketDAOImpl implements TicketMapper {
+public class TicketDAOImpl implements TicketDAO {
 
 	private Connection con;
 	private Statement stmt;
@@ -24,8 +24,8 @@ public class TicketDAOImpl implements TicketMapper {
 	private List<TicketVO> list = new ArrayList<TicketVO>();
 	private TicketVO ticket = new TicketVO();
 	
-	private static TicketMapper instance = new TicketDAOImpl();
-	public static TicketMapper getInstance(){
+	private static TicketDAO instance = new TicketDAOImpl();
+	public static TicketDAO getInstance(){
 		return instance;
 	}
 	private TicketDAOImpl() {

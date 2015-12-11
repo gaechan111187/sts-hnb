@@ -9,7 +9,7 @@
 						var rank = '<div id="test"><h2 style="color: white; padding-top: 10;">무비차트</h2></div>';
 						$.each(data, function(index, value) {
 							rank += '<div class="chart_rank" id="chart_rank'+index+'"><div class="chart_ranking chart_font_17 chart_bold">'+'NO.'+(index+1)+'</div>'
-									+'<img id='+this.filmNumber+' src="../images/'+this.filmNumber+'.jpg" alt="" width="250" height="350"><div class="chart_desc chart_bold">'+this.filmName+'</div></div>';
+									+'<img id='+this.filmNumber+' src="'+project+'/resources/images/'+this.filmNumber+'.jpg" alt="" width="250" height="350"><div class="chart_desc chart_bold">'+this.filmName+'</div></div>';
 							arr.push(this.filmNumber);
 						});
 										

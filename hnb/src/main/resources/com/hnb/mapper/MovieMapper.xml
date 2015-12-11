@@ -3,11 +3,22 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="com.hnb.mapper.MovieMapper">
-     <select id="getOne" resultType="com.hnb.movie.MovieVO">
-             SELECT * FROM movie WHERE filmNumber = #{filmNumber}  
-     </select>
- 
-     <select id="getUser" resultType="com.hnb.movie.MovieVO">
-             SELECT * FROM movie
-     </select>
+   <select id="selectAll" resultType="com.hnb.movie.MovieVO">
+   	Select 
+   		FILM_NUMBER AS filmNumber,
+   		FILM_NAME AS filmName,
+   		DIRECTOR AS director,
+   		ACTOR AS actor,
+   		RATE AS rate,
+   		RUNTIME AS runtime,
+   		PRICE AS price,
+   		GENRE AS genre,
+   		RELEASE_DATE AS releaseDate,
+   		END_DATE AS endDate,
+   		STORY AS story,
+   		CUT AS cut,
+   		TRAILER AS trailer,
+   		COUNTRY AS country
+   	FROM MOVIE
+   </select>
  </mapper>
