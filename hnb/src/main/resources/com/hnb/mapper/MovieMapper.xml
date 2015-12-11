@@ -39,7 +39,7 @@
    		COUNTRY AS country
  	FROM MOVIE WHERE FILM_NUMBER = #{filmNumber}
    </select>
-   <insert id="insertt" parameterType="com.hnb.movie.MovieVO">
+   <insert id="insert" parameterType="com.hnb.movie.MovieVO">
     INSERT INTO MOVIE
       (FILM_NUMBER,FILM_NAME,DIRECTOR,ACTOR,RATE,RUNTIME,PRICE,GENRE,RELEASE_DATE,END_DATE,STORY,CUT,TRAILER,COUNTRY)
     VALUES
