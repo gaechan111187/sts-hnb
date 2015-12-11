@@ -21,4 +21,51 @@
    		COUNTRY AS country
    	FROM MOVIE
    </select>
+   <select id="selectNameBy" parameterType="string" resultType="com.hnb.movie.MovieVO">
+   	SELECT
+   		FILM_NUMBER AS filmNumber,
+   		FILM_NAME AS filmName,
+   		DIRECTOR AS director,
+   		ACTOR AS actor,
+   		RATE AS rate,
+   		RUNTIME AS runtime,
+   		PRICE AS price,
+   		GENRE AS genre,
+   		RELEASE_DATE AS releaseDate,
+   		END_DATE AS endDate,
+   		STORY AS story,
+   		CUT AS cut,
+   		TRAILER AS trailer,
+   		COUNTRY AS country
+ 	FROM MOVIE WHERE FILM_NUMBER = #{filmNumber}
+   </select>
+   <insert id="insertt" parameterType="com.hnb.movie.MovieVO">
+    INSERT INTO MOVIE
+      (FILM_NUMBER,FILM_NAME,DIRECTOR,ACTOR,RATE,RUNTIME,PRICE,GENRE,RELEASE_DATE,END_DATE,STORY,CUT,TRAILER,COUNTRY)
+    VALUES
+      (#{filmNumber}, #{filmName}, #{director}, #{actor}, #{rate},  #{runtime}, 
+      #{price}, #{genre}, #{releaseDate}, #{endDate}, #{story}, #{cut},
+      #{trailer},#{country})
+  </insert>
+  <update id="update" parameterType="com.hnb.movie.MovieVO">
+    UPDATE MOVIE SET
+		FILM_NUMBER =#{filmNumber},
+		FILM_NAME =#{filmName},
+		DIRECTOR =#{director},
+		ACTOR =#{actor},
+   		RATE =#{rate},
+   		RUNTIME =#{runtime},
+   		PRICE =#{price},
+   		GENRE =#{genre},
+   		RELEASE_DATE =#{releaseDate},
+   		END_DATE =#{endDate},
+   		STORY =#{story},
+   		CUT =#{cut},
+   		TRAILER =#{trailer},
+   		COUNTRY =#{country}
+    WHERE FILM_NUMBER = #{filmNumber}
+  </update>
+  <delete id="delete" parameterType="string">
+	  DELETE FROM MOVIE WHERE FILM_NUMBER = #{filmNumber}
+  </delete>
  </mapper>

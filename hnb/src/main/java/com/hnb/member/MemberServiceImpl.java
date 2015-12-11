@@ -12,7 +12,7 @@ public class MemberServiceImpl  implements MemberService{
 		return instance;
 	}
 	
-	MemberMapper dao = MemberDAOImpl.getInstance();
+	MemberDAO dao = MemberDAOImpl.getInstance();
 	
 	// 회원가입
 	@Override
