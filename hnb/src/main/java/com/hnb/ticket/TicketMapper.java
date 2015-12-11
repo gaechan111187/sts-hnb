@@ -3,7 +3,7 @@ package com.hnb.ticket;
 import java.util.List;
 
 
-public interface TicketDAO {
+public interface TicketMapper {
 	// C
 	public int insert(TicketVO o);
 	

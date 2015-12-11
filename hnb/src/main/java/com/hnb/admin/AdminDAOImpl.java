@@ -1,9 +1,9 @@
 package com.hnb.admin;
 
-public class AdminDAOImpl implements AdminDAO{
-	private static AdminDAO instance = new AdminDAOImpl();
+public class AdminDAOImpl implements AdminMapper{
+	private static AdminMapper instance = new AdminDAOImpl();
 	private AdminDAOImpl() {}
-	public static AdminDAO getInstance(){
+	public static AdminMapper getInstance(){
 		return instance;
 	}
 }

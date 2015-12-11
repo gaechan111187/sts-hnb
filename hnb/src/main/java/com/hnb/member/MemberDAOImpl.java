@@ -14,7 +14,7 @@ import com.hnb.global.Constants;
 import com.hnb.global.DatabaseFactory;
 import com.hnb.global.Vendor;
 @Repository
-public class MemberDAOImpl implements MemberDAO{
+public class MemberDAOImpl implements MemberMapper{
 	private Connection con;
 	private Statement stmt;
 	private PreparedStatement pstmt;
@@ -23,8 +23,8 @@ public class MemberDAOImpl implements MemberDAO{
 	private MemberVO member = new MemberVO();
 	
 	
-	private static MemberDAO instance = new MemberDAOImpl();
-	public static MemberDAO getInstance() {
+	private static MemberMapper instance = new MemberDAOImpl();
+	public static MemberMapper getInstance() {
 		return instance;
 	}
 	private MemberDAOImpl() {

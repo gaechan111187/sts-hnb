@@ -15,7 +15,7 @@ import com.hnb.global.DatabaseFactory;
 import com.hnb.global.Vendor;
 
 @Repository
-public class ScheduleDAOImpl implements ScheduleDAO {
+public class ScheduleDAOImpl implements ScheduleMapper {
 
 	private Connection con;
 	private Statement stmt;
@@ -24,8 +24,8 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	private List<ScheduleVO> list = new ArrayList<ScheduleVO>();
 	private ScheduleVO schedule = new ScheduleVO();
 	
-	private static ScheduleDAO instance = new ScheduleDAOImpl();
-	public static ScheduleDAO getInstance(){
+	private static ScheduleMapper instance = new ScheduleDAOImpl();
+	public static ScheduleMapper getInstance(){
 		return instance;
 	}
 	private ScheduleDAOImpl() {

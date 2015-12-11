@@ -2,7 +2,7 @@ package com.hnb.ticket;
 
 import java.util.List;
 
-public interface ScheduleDAO {
+public interface ScheduleMapper {
 	// C
 		public int insert(ScheduleVO o);
 		

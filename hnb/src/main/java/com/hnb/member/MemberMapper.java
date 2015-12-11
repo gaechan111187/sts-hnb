@@ -2,7 +2,7 @@ package com.hnb.member;
 
 import java.util.List;
 
-public interface MemberDAO {
+public interface MemberMapper {
 	//CRUD
 	
 		// C : 추가(회원가입)

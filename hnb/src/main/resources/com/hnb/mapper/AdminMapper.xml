@@ -3,11 +3,4 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="com.hnb.mapper.AdminMapper">
-     <select id="getOne" resultType="com.hnb.admin.AdminVO">
-             SELECT * FROM user WHERE name = #{name}  
-     </select>
- 
-     <select id="getUser" resultType="com.hnb.admin.AdminVO">
-             SELECT * FROM user
-     </select>
  </mapper>

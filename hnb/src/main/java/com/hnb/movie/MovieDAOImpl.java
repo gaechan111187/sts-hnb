@@ -15,14 +15,14 @@ import com.hnb.global.DatabaseFactory;
 import com.hnb.global.Vendor;
 
 @Repository
-public class MovieDAOImpl implements MovieDAO{
+public class MovieDAOImpl implements MovieMapper{
 	private Connection con;
 	private Statement stmt;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	private static MovieDAO instance = new MovieDAOImpl();
-	public static MovieDAO getInstance(){
+	private static MovieMapper instance = new MovieDAOImpl();
+	public static MovieMapper getInstance(){
 		return instance;
 	}
 	private MovieDAOImpl(){
