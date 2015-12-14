@@ -5,7 +5,6 @@
 				ranking : function(project) {
 					var arr = [];
 					$.getJSON(project + '/movie/movie_Chart', function(data) {
-						alert("겟제이슨 서버 다녀옴")
 						var rank = '<div id="test"><h2 style="color: white; padding-top: 10;">무비차트</h2></div>';
 						$.each(data, function(index, value) {
 							rank += '<div class="chart_rank" id="chart_rank'+index+'"><div class="chart_ranking chart_font_17 chart_bold">'+'NO.'+(index+1)+'</div>'
@@ -52,7 +51,7 @@
 							});
 				},
 				trailer : function(project,data) {
-					$.getJSON(project + '/movie/Movie.do?page=movie_Tra&filmNumber='+data.filmNumber, function(data) {
+					$.getJSON(project + '/movie/movie_Tra'+data.filmNumber, function(data) {
 						var movieTra = '<div id="movie_tra" class="movie_tra_lay movie_margin_b20 "><h2>트레일러</h2>';
 						$.each(data, function(index, value) {
 							movieTra += '<div class="movie_tra margin_l20 movie_float"><iframe width="350" height="200" src="https://www.youtube.com/embed/'+value+'" frameborder="0" allowfullscreen></iframe></div>';

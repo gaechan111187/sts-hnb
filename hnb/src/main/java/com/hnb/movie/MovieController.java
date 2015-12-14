@@ -53,8 +53,9 @@ public class MovieController {
 			model.addAttribute("arr", arr);
 			return model;
 		}
-		@RequestMapping("/movie_Tra")
-		public Model movieTra(String filmNumber,Model model){
+		@RequestMapping("/movie_Tra/{movieName}")
+		public @ResponseBody String[] movieTra(
+				@PathVariable("movieName")String filmNumber){
 			logger.info("MovieController : movieTra()진입");
 			logger.info("MovieTra의 filmnumber :  {}",filmNumber);
 			movie = service.searchByName(filmNumber);
@@ -62,9 +63,9 @@ public class MovieController {
 			logger.info("movie_tra의 getTrailer : {}", tra);
 			String[]arrt = tra.split("/");
 			logger.info("트레일러 : {}", arrt);
-			model.addAttribute("arrt", arrt);
+			/*model.addAttribute("arrt", arrt);*/
 			
-			return model;
+			return arrt;
 		}
 		@RequestMapping("/movie_Basic")
 		public @ResponseBody MovieVO movieBasic(String filmNumber,	Model model){ 
