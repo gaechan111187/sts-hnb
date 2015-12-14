@@ -107,14 +107,13 @@
 		
 		/* 네비게이션 버튼 */
 		$("#movie_btn").click(function() {
-			alert("영화버튼클릭!!")
 			history.pushState("Movie_home","","");
 			Movie.home("${context}");
 		});
 		
 		$("#ticket_btn").click(function() {
 			history.pushState("Ticket_home","","");
-			$("#box").load("${context}/ticket/Ticket.do");
+			$(".mainView").load("${context}/ticket/Ticket.do");
 		});
 		
 		$("#theater_btn").click(function() {
@@ -124,7 +123,7 @@
 		
 		$("#event_btn").click(function() {
 			history.pushState("Event_home","","");
-			$("#box").load();
+			$(".mainView").load("${context}/event/boardList");
 		});
 		
 		/* 로그인 버튼 */

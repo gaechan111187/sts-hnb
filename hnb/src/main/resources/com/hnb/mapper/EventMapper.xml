@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.hnb.mapper.EventMapper">
+  <select id="selectAll" resultType="com.hnb.member.MemberVO">
+   	Select 
+   		ID AS id,
+   		PASSWORD AS password,
+   		NAME AS name,
+   		BIRTH AS birth,
+   		GENDER AS gender,
+   		PHONE AS phone,
+   		ADDR AS addr,
+   		EMAIL AS email,
+   		MY_THEATER AS my_Theater,
+   		REGDATE AS regdate
+   FROM (SELECT ROWNUM AS seq, m.* FROM MEMBER m)
+ 		WHERE seq BETWEEN #{start} AND #{end}
+   </select>
+   <select id="count" resultType="int">
+   	SELECT COUNT(*) AS count FROM MEMBER
+   </select>
+   
+ </mapper>
