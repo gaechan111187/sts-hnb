@@ -46,7 +46,7 @@
  			REGDATE AS regdate
  		FROM MEMBER WHERE ID = #{id}
  	</select>
- 	<select id="selectSomeBy" resultType="com.hnb.member.MemberVO" parameterType="string">
+ 	<select id="selectSomeBy" resultType="com.hnb.member.MemberVO" parameterType="com.hnb.global.Command">
  		SELECT 
  			ID AS id,
  			PASSWORD AS password,
@@ -57,9 +57,18 @@
  			EMAIL AS email,
  			PHONE AS phone,
  			REGDATE AS regdate
- 		FROM MEMBER WHERE ${COLUMN} = ${keyword}
+ 		FROM (SELECT ROWNUM AS seq, m.* FROM (
+ 			SELECT * FROM MEMBER 
+ 			WHERE ${column} LIKE '%' || #{keyword} || '%'
+ 		) m) 
+ 		WHERE seq BETWEEN #{start} AND #{end} 
  	</select>
  	<select id="count" resultType="int">
  		SELECT COUNT(*) AS count FROM MEMBER
  	</select>
+ 	  <select id="countByKeyword" resultType="int" parameterType="com.hnb.global.Command">
+	   	SELECT COUNT(*) AS count 
+	   	FROM MEMBER
+	   	WHERE ${column} LIKE '%' || #{keyword} || '%'
+   </select>
  </mapper>

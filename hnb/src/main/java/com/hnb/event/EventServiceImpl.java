@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.hnb.global.Command;
 import com.hnb.mapper.EventMapper;
+import com.hnb.mapper.MemberMapper;
+import com.hnb.member.MemberVO;
 import com.hnb.movie.MovieVO;
 
 @Service
@@ -27,5 +29,15 @@ public class EventServiceImpl implements EventService{
 		EventMapper mapper = sqlSession.getMapper(EventMapper.class);
 		int count =mapper.count();
 		return count;
+	}
+	public List<MemberVO> searchByKeyword(Command command) {
+		logger.info("memberServiceImpl : join");
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.selectSomeBy(command);
+	}
+	public int countByKeyword(Command command) {
+		logger.info("memberServiceImpl : countByKeyword");
+		MemberMapper mapper = sqlSession.getMapper(MemberMapper.class);
+		return mapper.countByKeyword(command);
 	}
 }
