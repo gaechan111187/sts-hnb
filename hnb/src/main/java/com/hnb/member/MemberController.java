@@ -1,33 +1,38 @@
 package com.hnb.member;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 
 @Controller
+@SessionAttributes("user")
 @RequestMapping("/member")
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	@Autowired
-	MemberVO member;
-	@Autowired
-	MemberServiceImpl service;
+	@Autowired MemberVO member;
+	@Autowired MemberServiceImpl service;
 	@RequestMapping("/admin_home")
 	public String adminHome(){
 		logger.info("admin_home 진입");
-		return "/member/admin_home";
+		return "member/admin_home";
 	}
 	@RequestMapping("/provision")
 	public String provision(){
 		logger.info("provision 진입");
-		return "/member/provision";
+		return "member/provision";
 	}
 	
 	@RequestMapping("/join_member")
@@ -72,38 +77,40 @@ public class MemberController {
 			logger.info("회원가입실패");
 			model.addAttribute("result", "fail");
 		}
-		return "/member/join_member";
+		return "member/join_member";
 	}
 	@RequestMapping("/join_Result")
 	public String joinResult(){
-		return "/member/join_Result";
+		logger.info("Member joinResult 진입");
+		return "member/join_Result";
 	}
 	@RequestMapping("/logout")
-	public Model logout(Model model){
+	public String logout(Model model, SessionStatus status){
 		logger.info("Member 로그아웃 진입");
-		model.addAttribute("result", "success");
-		return model;
+		status.setComplete();
+		return "global/default.tiles";
 	}
 	@RequestMapping("/login")
-	public @ResponseBody MemberVO login(String id, String password, Model model){
+	public @ResponseBody MemberVO login(String id, @RequestParam("pw")String password, 
+						Model model){
 		logger.info("Member 로그인 진입");
 		model.addAttribute("id");
 		model.addAttribute("pw");
 		logger.info("유저아이디 : {}", id);
 		logger.info("유저비번 : {}", password);
 		member = service.login(id, password);
-		if (member==null) {
-			model.addAttribute("result","fail");
+		model.addAttribute("user", member);
+		if (member.getId().equals(id)) {
+			logger.info("로그인성공");
 		} else {
-			model.addAttribute("result", "success");
-			model.addAttribute("id", id);
-			model.addAttribute("pw", password);
+			logger.info("로그인 실패");
+		}
+		//choa 는 관리자
 			if (id.equals("choa")) {
 				model.addAttribute("admin", "yes");
 			} else {
 				model.addAttribute("admin", "no");
 			}
-		}
 		
 		return member;
 	}
@@ -123,11 +130,14 @@ public class MemberController {
 	@RequestMapping("/mypage")
 	public String mypage(){
 		logger.info("마이페이지 진입");
-		return "/member/mypage";
+		return "member/mypage.tiles";
 	}
-	@RequestMapping("/detail")
-	public Model detail(Model model){
+	@RequestMapping("/detail/{id}")
+	public @ResponseBody MemberVO detail(
+			@PathVariable ("id")String id
+			){
 		logger.info("Detail 진입");
-		return model;
+		member = service.selectById(id);
+		return member;
 	}
 }

@@ -10,10 +10,11 @@ public interface MemberService {
 	
 	// R : 조회
 	public List<MemberVO> getList(Command command); //전체회원목록
-	public List<MemberVO> searchByKeyword(String column,String keyword); //임의의 값으로 검색
+	public List<MemberVO> searchByKeyword(Command command); //임의의 값으로 검색
 	public MemberVO selectById(String id); //아이디로 조회
 	public int count(); //전체회원수 조회
 	public MemberVO login(String id, String pass); //로그인
+	public int countByKeyword(Command command); // 검색결과의 갯수만 조회
 	
 	// U : 개인정보 변경
 	public int change(MemberVO member);
