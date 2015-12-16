@@ -16,12 +16,13 @@ public class MemberVO {
 	private String addr; // 주소
 	private String regdate;
 	private String my_Theater;
+	private String profile;
 	
 	public MemberVO() {
 	}
 	
 	public MemberVO(String id, String password, String name, String birth, 
-			String phone, String email, String gender, String addr, String theater_name, String regdate) {
+			String phone, String email, String gender, String addr, String theater_name, String regdate, String profile) {
 			this.id = id;
 			this.password = password;
 			this.name = name;
@@ -32,6 +33,7 @@ public class MemberVO {
 			this.addr = addr;
 			this.regdate = regdate;
 			this.my_Theater = theater_name;
+			this.profile = profile;
 	}
 	
 	
@@ -97,6 +99,13 @@ public class MemberVO {
 
 	public void setMy_Theater(String my_Theater) {
 		this.my_Theater = my_Theater;
+	}
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 	@Override

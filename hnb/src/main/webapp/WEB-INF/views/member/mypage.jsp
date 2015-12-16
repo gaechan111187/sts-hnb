@@ -2,65 +2,60 @@
 <script src="${context}/js/global.js"></script>
 <script type="text/javascript">
 	$(function() {
-		LoginMember.detail('${context}/member/detail/${user.id}');
+		LoginMember.detail(context+'/member/detail/${user.id}');
 	});
 	var LoginMember = {
 			detail : function(url) {
 				$.getJSON(url,
 					function(data){
-					var table = '<table id="tab_detail"><tr><td rowspan="8" id="td_profile"><img id="profile" src="${img}/default.jpg" width="70%" height="80%"/></td>'
-					+'<th id="item">항목</th><th>빈 칸</th></tr><tr><td>아이디</td><td>${user.id}</td></tr><tr><td>비밀번호</td><td>${user.password}'
-					+'</td></tr><tr><td>이름</td><td>${user.name}</td></tr><tr><td>생일</td><td>${user.gender}</td></tr><tr>'
-					+'<td>주소</td><td>${user.addr}</td></tr><tr><td>이메일</td><td>${user.email}</td>'
-					+'</tr><tr><td>등록일</td><td>${user.regdate}</td></tr><tr>'
-					+'<td><button id="changeImg">사진변경</button></td>'
-					+'<td><button id="changeInfo">정보수정</button><button id="remove">회원탈퇴</button></td>'
-					+'<td><button id="confirm">확인</button></td></tr></table>';
+					var table = '<table id="tab_detail"><tr><td rowspan="9" id="td_profile"><img id="profile" src="${img}/'+data.profile+'" width="70%" height="80%"/></td>'
+					+'<th id="item">항목</th><th>빈 칸</th></tr><tr><td>아이디</td><td>'+data.id+'</td></tr><tr><td>비밀번호</td><td>'+data.password
+					+'</td></tr><tr><td>이름</td><td>'+data.name+'</td></tr><tr><td>생일</td><td>'+data.birth+'</td></tr><tr>'
+					+'<td>주소</td><td>'+data.addr+'</td></tr><tr><td>이메일</td><td>'+data.email+'</td>'
+					+'</tr><tr><td>등록일</td><td>'+data.regdate+'</td></tr><tr>'
+					+'<td colspan="3"><button id="changeInfo" style="margin-right : 100px">정보수정</button><button id="remove">회원탈퇴</button></td></tr></table>'
 					$('.mainView').empty();
 					$('.mainView').html(table);
-						LoginMember.style();
+					LoginMember.style();
 					$('#changeInfo').click(function() {
 						LoginMember.updateForm();
 					});
 					$('#remove').click(function() {
-						LoginMember.remove('${member.userid}');
+						LoginMember.remove('${member.id}');
 					});
 				});
 			},
 			updateForm : function() {
-				$.getJSON('${context}/member.do?page=detail&userid=${member.userid}',
+				$.getJSON(context+'/member/detail/${user.id}',
 						function(data){
-					$('<form action="${context}/member/update" id="frm">')
-					.appendTo($('#box').empty());
-					var table = '<table><tr><td rowspan="9" id="td_profile"><img id="profile" src="${context}/images/${member.profile}" width="70%" height="80%"/></td>'
-					+'<th id="item">항목</th><th>빈 칸</th></tr><tr><td>아이디</td><td>${member.userid}</td></tr><tr>'
-					+'<td>비밀번호</td><td><input type="password" id="password" value="${member.password}">'
-					+'</td></tr><tr><td>이름</td><td>${member.name}</td></tr><tr><td>생일</td><td>${member.gender}</td></tr><tr>'
-					+'<td>주소</td><td><input type="text" id="addr" value="${member.addr}"></td></tr>'
-					+'<tr><td>이메일</td><td><input type="text" id="email" value="${member.email}"></td>'
-					+'<td><input type="text" id="phone" value="${member.phone}"></td>'
-					+'</tr><tr><td>등록일</td><td>${member.regdate}</td></tr><tr>'
-					+'<td><button id="changeImg">사진변경</button></td>'
-					+'<td><button id="changeInfo">정보수정</button></td>'
-					+'<td><button id="confirm">확인</button></td></tr></table>';
+					$('<form action="${context}/member/update" id="frm" method="post" enctype="multipart/form-data">')
+					.appendTo($('.mainView').empty());
+					var table = '<table id="tab_detail"><tr><td rowspan="9" id="td_profile"><img id="profile" name="profile" src="${img}/'+data.profile+'" width="70%" height="80%"/></td>'
+					+'<th id="item">항 목</th><th>내 용</th></tr><tr><td>아이디</td><td><input type="text" id="id" name="id" value="'+data.id+'"></td></tr><tr>'
+					+'<td>비밀번호</td><td><input type="password" id="password" name="password" value="'+data.password+'">'
+					+'</td></tr><tr><td>이름</td><td>'+data.name+'</td></tr><tr><td>생일</td><td>'+data.birth+'</td></tr><tr>'
+					+'<td>주소</td><td><input type="text" id="addr" name="addr" value="'+data.addr+'"></td></tr>'
+					+'<tr><td>이메일</td><td><input type="text" id="email" name="email" value="'+data.email+'"></td></tr>'
+					+'<tr><td>전화번호</td><td><input type="text" id="phone" name="phone" value="'+data.phone+'"></td>'
+					+'</tr><tr><td>등록일</td><td>'+data.regdate+'</td></tr><tr>'
+					+'<td><input type="file" id="file" name="file" value="이미지변경" style="margin:auto"/></td>'
+					+'<td colspan="2"><button id="confirm" style="width:100px">확인</button></td></tr></table>';
 					$('#frm').html(table);
-					Member.style();
+					LoginMember.style();
 					$('#confirm').click(function() {
 						$('#frm').submit(function(e) {
 							e.preventDefault(); /* 기본 폼태그의 서브밋을 막아라. 자스의 서브밋을 실행해라 */
-							$.ajax('${context}/member.do',{
-								type : 'get',
-								data : {
-									password : $('#password').val(),
-									addr : $('#addr').val(),
-									phone : $('#phone').val(),
-									email : $('#email').val(),
-									page : 'update'
-								},
+							var postData = new FormData($('#frm')[0]);
+							$.ajax('${context}/member/update',{
+								type : 'post',
+								data : postData,
 								async : true, // 비동기로 할 지 여부, 기본값  true, 생략가능
 								dataType : 'json',
+								mimeType : 'multipart/form-data',
+								contentType : false,
+								processData : false,
 								success : function(data) {
-									location.href="${context}/member.do?page=mypage&userid="+data.userid;
+									alert('수정성공');
 								},
 								error : function(xhr, status, msg) {
 									alert('에러발생상태 : '+status +', 내용 :'+msg);
@@ -86,13 +81,14 @@
 				});
 			},
 			style : function(){
-				$('#tab_detail').css('width', '80%').css('margin','auto').css('border','1px solid white');
-				$('td').add('th').css('text-align', 'center').css('text-align','center').css('border','1px solid white');
-				$('tr').add('th').add('td').css('float','center').css('color', 'white').css('border','1px solid white');
+				$('#tab_detail').css('width','80%').css('height','400px').css('margin','auto').css('border','1px solid white');
+				$('td').add('th').css('text-align','center').css('border','1px solid white').css('background-color','black');
+				$('tr').add('th').add('td').css('float','center').css('color','white').css('border','1px solid white');
+				$('#box').css('clear','both').css('margin','20px');
 				$('#item').css('width','400px');
 				$('#profile').css('width','300px');
 				$('#td_profile').css('width','400px');
-				$('#changeImg').add('#changeInfo').add('#remove').add('#confirm').css('color', 'black');
+				$('#changeImg').add('#changeInfo').add('#remove').add('#confirm').css('color','black');
 			},
 			remove : function(userid) {
 				$.ajax('${context}/member.do',{

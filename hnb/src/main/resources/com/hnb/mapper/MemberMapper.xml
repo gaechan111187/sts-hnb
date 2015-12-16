@@ -13,7 +13,8 @@
 	 		PASSWORD = #{password}, 
 	 		ADDR = #{addr}, 
 	 		PHONE = #{phone}, 
-	 		EMAIL = #{email} 
+	 		EMAIL = #{email},
+	 		PROFILE = #{profile} 
  		WHERE ID = #{id}
  	</update>
  	<delete id="delete" parameterType="string">
@@ -29,7 +30,8 @@
  			GENDER AS gender,
  			EMAIL AS email,
  			PHONE AS phone,
- 			REGDATE AS regdate
+ 			REGDATE AS regdate,
+ 			PROFILE AS profile
  		FROM (SELECT ROWNUM AS seq, m.* FROM MEMBER m)
  		WHERE seq BETWEEN #{start} AND #{end}
  	</select>
@@ -43,7 +45,8 @@
  			GENDER AS gender,
  			EMAIL AS email,
  			PHONE AS phone,
- 			REGDATE AS regdate
+ 			REGDATE AS regdate,
+ 			PROFILE AS profile
  		FROM MEMBER WHERE ID = #{id}
  	</select>
  	<select id="selectSomeBy" resultType="com.hnb.member.MemberVO" parameterType="com.hnb.global.Command">
@@ -56,7 +59,8 @@
  			GENDER AS gender,
  			EMAIL AS email,
  			PHONE AS phone,
- 			REGDATE AS regdate
+ 			REGDATE AS regdate,
+ 			PROFILE AS profile
  		FROM (SELECT ROWNUM AS seq, m.* FROM (
  			SELECT * FROM MEMBER 
  			WHERE ${column} LIKE '%' || #{keyword} || '%'

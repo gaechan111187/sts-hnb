@@ -1,20 +1,21 @@
 package com.hnb.member;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.hnb.global.Constants;
+import com.hnb.global.FileUpload;
 
 
 @Controller
@@ -88,7 +89,7 @@ public class MemberController {
 	public String logout(Model model, SessionStatus status){
 		logger.info("Member 로그아웃 진입");
 		status.setComplete();
-		return "global/default.tiles";
+		return "redirect:/";
 	}
 	@RequestMapping("/login")
 	public @ResponseBody MemberVO login(String id, @RequestParam("pw")String password, 
@@ -132,12 +133,40 @@ public class MemberController {
 		logger.info("마이페이지 진입");
 		return "member/mypage.tiles";
 	}
+	
 	@RequestMapping("/detail/{id}")
 	public @ResponseBody MemberVO detail(
 			@PathVariable ("id")String id
 			){
 		logger.info("Detail 진입");
 		member = service.selectById(id);
+		return member;
+	}
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public @ResponseBody MemberVO update(
+			@RequestParam(required=false, value="file")MultipartFile multipartFile,
+			@RequestParam("password")String password,
+			@RequestParam("addr")String addr,
+			@RequestParam("email")String email,
+			@RequestParam("phone")String phone,
+			@RequestParam("id")String id){
+		logger.info("멤버컨트롤러 update 진입");
+		String path = Constants.imageDomain+"resources\\images\\";
+		FileUpload fileUpload = new FileUpload();
+		String fileName = multipartFile.getOriginalFilename();
+		String fullPath = fileUpload.uploadFile(multipartFile, path, fileName);
+		logger.info("파일 업로드 경로 : {}",fullPath);
+		member.setPassword(password);
+		member.setAddr(addr);
+		member.setEmail(email);
+		member.setPhone(phone);
+		member.setProfile(fileName);
+		int result = service.change(member);
+		if (result == 1) {
+			logger.info("멤버컨트롤러 수정 성공");
+		} else {
+			logger.info("멤버컨트롤러 수정 실패");
+		}
 		return member;
 	}
 }

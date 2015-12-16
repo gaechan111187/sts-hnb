@@ -20,4 +20,5 @@ public class Constants {
 	public static final String HSQL_ID = "sa";
 	public static final String HSQL_PASSWORD = "";
 	public static final String VIEW = "/WEB-INF/view/";
+	public static final String imageDomain = "C:\\Users\\user\\git\\sts-hnb\\hnb\\src\\main\\webapp\\";
 }
