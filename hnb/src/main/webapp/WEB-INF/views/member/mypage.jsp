@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script src="${context}/js/global.js"></script>
 <script type="text/javascript">
 	$(function() {
 		LoginMember.detail(context+'/member/detail/${user.id}');
@@ -55,7 +54,22 @@
 								contentType : false,
 								processData : false,
 								success : function(data) {
-									alert('수정성공');
+									var table = '<table id="tab_detail"><tr><td rowspan="9" id="td_profile"><img id="profile" src="${img}/'+data.profile+'" width="70%" height="80%"/></td>'
+									+'<th id="item">항목</th><th>빈 칸</th></tr><tr><td>아이디</td><td>'+data.id+'</td></tr><tr><td>비밀번호</td><td>'+data.password
+									+'</td></tr><tr><td>이름</td><td>'+data.name+'</td></tr><tr><td>생일</td><td>'+data.birth+'</td></tr><tr>'
+									+'<td>주소</td><td>'+data.addr+'</td></tr><tr><td>이메일</td><td>'+data.email+'</td>'
+									+'</tr><tr><td>등록일</td><td>'+data.regdate+'</td></tr><tr>'
+									+'<td colspan="3"><button id="changeInfo" style="margin-right : 100px">정보수정</button><button id="remove">회원탈퇴</button></td></tr></table>'
+									$('.mainView').empty();
+									$('.mainView').html(table);
+									LoginMember.style();
+									$('#changeInfo').click(function() {
+										LoginMember.updateForm();
+									});
+									$('#remove').click(function() {
+										LoginMember.remove('${member.id}');
+									});
+									
 								},
 								error : function(xhr, status, msg) {
 									alert('에러발생상태 : '+status +', 내용 :'+msg);

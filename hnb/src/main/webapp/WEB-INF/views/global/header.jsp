@@ -67,60 +67,29 @@
 
 <script type="text/javascript">
 	$(function() {
-		
-				
-		/* 메인 버튼 */
-		$("#home").click(function() {
-			$("#box").load(context+"/global/Main.do?page=default");
-		});
-		
-		/* 네비게이션 버튼 */
-		$("#movie_btn").click(function() {
-			Movie.home(context);
-		});
-		
-		$("#ticket_btn").click(function() {
-			$(".mainView").load(context+"/ticket/Ticket.do");
-		});
-		
-		$("#theater_btn").click(function() {
-			$("#box").load();
-		});
-		
-		$("#event_btn").click(function() {
-			$(".mainView").load(context+"/event/boardList/1");
-		});
-		
-		/* 로그인 버튼 */
-		$("#header").on("click","#join_btn",function() {
-			Member.join(context);
-		});
-	
-		$("#header").on("click","#login_btn",function() {
-			Member.login(context);
-		});
-		
-		$("#header").on("click","#logout_btn",function() {
-			Member.logout(context);
-		});
-		
-		/*마이페이지 버튼 */
-		$("#header").on("click", "#mypage_btn",function() {
-			$("#box").load(context+"/member/Member.do?page=mypage");
-		});
-		
-		/* 관리자 버튼 */
-		$("#outbox").on("click","#admin_home",function() {
-			Admin.home(context);
-		});
-		$("#outbox").on("click","#admin_member",function() {
-			Admin.member(context);
-		});
-		$("#outbox").on("click","#admin_movie",function() {
-			Admin.movie(context);
-		});
-		
-	
+		var $home = $('#home');
+		var $event = $('#event_btn');
+		var $movie = $('#movie_btn');
+		var $mainView = $('.mainView');
+		var $ticket = $('#ticket_btn');
+		var $login = $('#login_btn');
+		var $logout = $('#logout_btn');
+		var $join = $('#join_btn');
+		var $mypage = $('#mypage_btn');
+		var $adminHome = $('#admin_home');
+		var $adminMember = $('#admin_member');
+		var $adminMovie = $('#admin_movie');
+		global.load($home,$mainView,context+"/");
+		global.load($ticket,$mainView,context+"/ticket/Ticket.do");
+		global.load($mypage,$mainView,context+"/member/mypage");
+		global.move($event, context+"/event/boardList");
+		$movie.click(function() {Movie.home(context);});
+		$join.click(function() {Member.join(context);});
+		$login.click(function() {Member.login(context);});
+		$logout.click(function() {Member.logout(context);});
+		$adminHome.click(function() {Admin.home(context);});
+		$adminMember.click(function() {Admin.member(context);});
+		$adminMovie.click(function() {Admin.movie(context);});
 	});
 	
 	

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<LINK REL="stylesheet" type="text/css" href="${css}/board.css"/>	
+<LINK REL="stylesheet" type="text/css" href="${css}/board.css"/>
 <c:set var="PAGESIZE" value="5"/>
 <c:set var="GROUPSIZE" value="3"/>
 <c:choose>
