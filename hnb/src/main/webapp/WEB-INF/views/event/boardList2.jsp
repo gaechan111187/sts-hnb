@@ -49,7 +49,7 @@
 
 
 
-<TABLE id="pagenation">
+<TABLE id="pagination">
 
 	<TR>
 		<TD ALIGN=LEFT WIDTH=100>

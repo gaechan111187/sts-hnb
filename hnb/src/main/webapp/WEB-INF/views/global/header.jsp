@@ -1,21 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	
 	<div>
 	<div id="frm_toggle">
 	<c:if test="${empty sessionScope.user}">
 	   	<!-- 로그인 안한 상태 -->
-		<div id="frm_login" class="form-2">
+		<form id="frm_login" class="form-2" name="frm_login">
 			<p class="float">
-				<label for="login"><i class="icon-user">ID</i></label> <input type="text" name="login" placeholder="UserID">
+				<label for="login"><i class="icon-user">ID</i></label> <input type="text" id="id" name="id" placeholder="UserID">
 			</p>
 			<p class="float">
-				<label for="password"><i class="icon-user">PW</i></label> <input type="password" name="password" placeholder="Password" class="showpassword">
+				<label for="password"><i class="icon-user">PW</i></label> <input type="password" id="password" name="password" placeholder="Password" class="showpassword">
 			</p>
 			<p class="clearfix">
 				<a id="join_btn" class="log-twitter">회원 가입</a> 
 				<a id="login_btn" class="log-twitter" style="margin-left:10px;">로그인</a> 
 			</p>
-		</div>
+		</form>
 		</c:if>
 		<c:if test="${not empty sessionScope.user}">
 			<div id="frm_logined" class="form-2">
@@ -32,9 +31,7 @@
 		세상을 바꾸는 힘, Culture MTB(Movie Theater BOX)</div>
 	</div>
 
-	<!-- Navigation -->
     <nav class="navbar navbar-default" role="navigation" >
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
@@ -42,10 +39,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
                 <a class="navbar-brand" href="index.html">Business Casual</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style=" margin-left:33%;" >
                 <ul class="nav navbar-nav">
                     <li>
@@ -58,7 +53,10 @@
                         <button id="theater_btn">극장</button>
                     </li>
                     <li>
-                        <button id="event_btn">이벤트&컬쳐</button>
+                        <button id="board_btn">게시판</button>
+                    </li>
+                     <li>
+                        <button id="admin_btn">관리자</button>
                     </li>
                 </ul>
             </div>
@@ -68,10 +66,11 @@
 <script type="text/javascript">
 	$(function() {
 		var $home = $('#home');
-		var $event = $('#event_btn');
+		var $board = $('#board_btn');
 		var $movie = $('#movie_btn');
-		var $mainView = $('.mainView');
+		var $admin = $('#admin_btn');
 		var $ticket = $('#ticket_btn');
+		var $mainView = $('.mainView');
 		var $login = $('#login_btn');
 		var $logout = $('#logout_btn');
 		var $join = $('#join_btn');
@@ -79,10 +78,11 @@
 		var $adminHome = $('#admin_home');
 		var $adminMember = $('#admin_member');
 		var $adminMovie = $('#admin_movie');
-		global.load($home,$mainView,context+"/");
+		global.move($home,context+"/");
 		global.load($ticket,$mainView,context+"/ticket/Ticket.do");
 		global.load($mypage,$mainView,context+"/member/mypage");
-		global.move($event, context+"/event/boardList");
+		global.move($board, context+"/event/boardList");
+		global.move($admin, context+"/admin/main");
 		$movie.click(function() {Movie.home(context);});
 		$join.click(function() {Member.join(context);});
 		$login.click(function() {Member.login(context);});

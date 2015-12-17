@@ -12,7 +12,7 @@ var global = {
    },
    load : function(btn,target,url) {
 	   btn.click(function() {
-		$target.load(url);
+		target.load(url);
 	});
    },
    move : function(btn,url) {

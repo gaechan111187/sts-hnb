@@ -3,21 +3,24 @@ var Member = {
 			$("#box").load(project + "/member/Member.do");
 		},
 		login : function(project) {
-			alert("로그인 진입")
+			var member = {
+					"id":$('#id').val(),
+					"password":$('#password').val()
+					};
+			alert('로그인버튼 클릭'+member);
 			$.ajax(project + "/member/login",{
-				data : {
-					id : $(".form-2 input:text[name=login]").val(),
-					pw : $(".form-2 input:password[name=password]").val()
-				},
+				data : JSON.stringify(member),
 				dataType : "json",
+				type : 'post',
+				contentType: "application/json;",
+				mimeType: "application/json;",
+				async : false,
 				success : function(data) {
-					//로그인 결과가 성공이면
 					if(data != null){
-						alert("로그인성공")
-					//	
-						location.href = project + "/member/mypage";
+						alert("로그인 성공 !!!!");
+						location.href = project+"/member/mypage";
 						// 관리자 아이디로 확인되면
-						if(data.admin === "yes") {
+						if(member.id === "choa") {
 							$("#outbox").append(
 								'<table id="admin_nav"><tr><td><button id="admin_home">홈</button></td></tr>'+
 								'<tr><td><button id="admin_member">회원관리</button></td></tr>'+
@@ -49,7 +52,7 @@ var Member = {
 			});
 		},
 		logout : function(project) {
-			location.href = project +"/member/logout";
+			location.href = project+"/member/logout";
 		},
 		
 		/* 회원가입 html */
@@ -88,11 +91,3 @@ var Member = {
 		/* 마이페이지 상세화면 => 마이페이지.jsp에서 구현*/
 		
 	};
-		
-		
-
-
-
-
-
-

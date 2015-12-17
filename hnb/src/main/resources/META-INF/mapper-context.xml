@@ -3,15 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
-		<typeAlias type="com.hnb.movie.MovieVO" alias="Movie"/>
-	</typeAliases>
-   <mappers>
+  <typeAliases>
+  	<typeAlias type="com.hnb.movie.MovieVO" alias="Movie"/>
+  </typeAliases>	
+  <mappers>
     <mapper resource="com/hnb/mapper/AdminMapper.xml"/>
     <mapper resource="com/hnb/mapper/ArticleMapper.xml"/>
     <mapper resource="com/hnb/mapper/MemberMapper.xml"/>
     <mapper resource="com/hnb/mapper/MovieMapper.xml"/>
     <mapper resource="com/hnb/mapper/ScheduleMapper.xml"/>
-    <mapper resource="com/hnb/mapper/TicketMapper.xml"/>
+    <mapper resource="com/hnb/mapper/TicketMapper.xml"/>   
   </mappers>
 </configuration>
