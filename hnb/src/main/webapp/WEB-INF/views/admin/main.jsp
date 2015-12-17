@@ -76,5 +76,3 @@ $(function() {
  };
  
 </script>
-<%-- <IMG SRC="${img}/btn_nxt_block.gif">   --%>
-<%-- <IMG SRC="${img}/btn_search.gif" ALIGN=absmiddle STYLE=CURSOR:HAND>--%>
