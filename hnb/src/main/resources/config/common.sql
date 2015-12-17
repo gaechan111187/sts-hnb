@@ -2,7 +2,7 @@ create user movie identified by movie;
 grant dba to movie;
 
 conn movie/movie
-
+create sequence seq;
 create table theater(
 	theater_name varchar2(50),
 	constraint theater_pk primary key(theater_name)
@@ -60,7 +60,7 @@ create table room(
 	constraint room_pk primary key(theater_name,room_name)
 );
 
-create sequence seq;
+
 create table schedule(
 	seq number,
 	film_number varchar2(50),

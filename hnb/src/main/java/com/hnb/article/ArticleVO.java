@@ -4,24 +4,43 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ArticleVO {
-	int rcdNo; //글번호
-	int grpNO; //글 그룹 번호
-	String usrName; //작성자 이름
-	String usrMail; //작성자 이메일
-	String usrSubject; //글 제목
-	String usrContent; //글 내용
-	String usrPass; //글 비번
-	String usrFileName; //업로드 되는 파일 이름
-	int usrFileSize; //업로드 되는 파일 크기
-	String usrDate; //글 작성일
-	int usrRefer; //글 참조횟수
-	int rcdLevel; //글 레벨
-	int rcdOrder; //글 그룹에서의 글의 출력 순서
+	private int rcdNo; //글번호
+	private int grpNo; //글 그룹 번호
+	private String usrName; //작성자 이름
+	private String usrMail; //작성자 이메일
+	private String usrSubject; //글 제목
+	private String usrContent; //글 내용
+	private String usrPass; //글 비번
+	private String usrFileName; //업로드 되는 파일 이름
+	private int usrFileSize; //업로드 되는 파일 크기
+	private String usrDate; //글 작성일
+	private int usrRefer; //글 참조횟수
+	private int rcdLevel; //글 레벨
+	private int rcdOrder; //글 그룹에서의 글의 출력 순서
+	public ArticleVO() {
+	}
+	public ArticleVO(int rcdNo, int grpNo, String usrNmae, String usrMail, String usrSubject,
+					String usrContent, String usrPass, String usrFileName, int usrFileSize, 
+					String usrDate, int usrRefer, int rcdLevel, int rcdOrder) {
+		this.rcdNo = rcdNo;
+		this.grpNo = grpNo;
+		this.usrName = usrNmae;
+		this.usrMail = usrMail;
+		this.usrSubject = usrSubject;
+		this.usrContent = usrContent;
+		this.usrPass = usrPass;
+		this.usrFileName = usrFileName;
+		this.usrFileSize = usrFileSize;
+		this.usrDate = usrDate;
+		this.usrRefer = usrRefer;
+		this.rcdLevel = rcdLevel;
+		this.rcdOrder = rcdOrder;
+	}
 	public int getRcdNo() {
 		return rcdNo;
 	}
-	public int getGrpNO() {
-		return grpNO;
+	public int getGrpNo() {
+		return grpNo;
 	}
 	public String getUsrName() {
 		return usrName;
@@ -59,8 +78,8 @@ public class ArticleVO {
 	public void setRcdNo(int rcdNo) {
 		this.rcdNo = rcdNo;
 	}
-	public void setGrpNO(int grpNO) {
-		this.grpNO = grpNO;
+	public void setGrpNo(int grpNo) {
+		this.grpNo = grpNo;
 	}
 	public void setUsrName(String usrName) {
 		this.usrName = usrName;

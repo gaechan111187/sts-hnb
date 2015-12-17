@@ -1,6 +1,8 @@
 package com.hnb.event;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,16 +33,20 @@ public class EventController {
 	
 	// RESTful 방식 (url 에 {} 이 있어서 @PathVariable 사용한 경우)
 	@RequestMapping("/boardList/{pageNo}")
-	public @ResponseBody List<ArticleVO> boardList(
+	public @ResponseBody Map boardList(
 			@PathVariable("pageNo")String pageNo,
 			Model model){
 		logger.info("EventController article()");
 		logger.info("넘어온 페이지번호 : {}",pageNo);
 		List<ArticleVO> list = articleService.getList(CommandFactory.list(pageNo));
-/*		model.addAttribute("memberList",list);
+		Map result = new HashMap();
+		int count = articleService.count();
+		result.put("count", count);
+		result.put("list", list);
+		/*		model.addAttribute("memberList",list);
 		model.addAttribute("count", service.count());
 		model.addAttribute("pageNo",pageNo);*/
-		return list;
+		return result;
 	}
 	@RequestMapping("/boardList")
 	public String goList(){
@@ -58,8 +64,8 @@ public class EventController {
 		logger.info("넘어온 컬럼 : {}",column);
 		logger.info("넘어온 검색어 : {}",keyword);
 		Command command = CommandFactory.search(column, keyword, pageNo);
-		List<MemberVO> list = service.searchByKeyword(command);
-		int count = service.countByKeyword(command);
+		List<ArticleVO> list = articleService.searchByKeyword(command);
+		int count = articleService.countByKeyword(command);
 		logger.info("리스트 결과 : {}",list.size());
 		model.addAttribute("memberList",list);
 		model.addAttribute("pageNo", pageNo);

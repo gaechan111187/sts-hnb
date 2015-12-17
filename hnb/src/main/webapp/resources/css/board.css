@@ -31,7 +31,10 @@
 #tab_borderList tr td{
 	BORDER:1px solid white;
 }
-
+#tab_test{
+	margin: auto;
+	width: 80%;
+}
 #boardList input,textarea,form {
   font-size:12pt; font-family:"굴림"; line-height:12pt;
 }

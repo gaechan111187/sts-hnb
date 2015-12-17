@@ -71,4 +71,11 @@ public class ArticleServiceImpl implements ArticleService{
 		return mapper.remove(rcdNo);
 	}
 
+	@Override
+	public int count2(Command command) {
+		logger.info("ArticleServiceImpl : count2");
+		ArticleMapper mapper = sqlSession.getMapper(ArticleMapper.class);
+		return mapper.count2(command);
+	}
+
 }
