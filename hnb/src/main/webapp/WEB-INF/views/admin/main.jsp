@@ -20,22 +20,57 @@ $(function() {
 		});
 		table += "</TABLE></div>";
 		var pagination = '<TABLE id="pagination">'
-		+'<TR><TD ALIGN=LEFT WIDTH=100><IMG SRC="${img}/btn_new.gif" onClick="";STYLE=CURSOR:HAND></TD>'
-		+'<TD WIDTH=320 ALIGN=CENTER><c:if test="${startPage ne 1}"><a href="${context}/event/boardList/1">'
-		+'<IMG SRC="${img}/btn_bf_block.gif">&nbsp;</a></c:if>'
-		+'<c:if test="${startPage - GROUPSIZE gt 0}"><a href="${context}/event/boardList/${startPage-GROUPSIZE}">'
-		+'<IMG SRC="${img}/btn_bf_page.gif">&nbsp;</a></c:if>'
-		+'<c:forEach begin="${startPage}" end="${lastPage}" step="1" varStatus="status"><c:choose>'
-		+'<c:when test="${status.index == pageNo}"><font style="color:red;font-size: 20px">${status.index}</font></c:when>'
-		+'<c:otherwise><a href="${context}/event/boardList/${status.index}"><font>${status.index}</font></a></c:otherwise></c:choose></c:forEach>'
-		+'<c:if test="${startPage + GROUPSIZE le totPage}"><a href="${context}/event/boardList/${startPage+GROUPSIZE}">'
-		+'<IMG SRC="${img}/btn_nxt_page.gif">&nbsp;</a></c:if>'
-		+'</TD><TD WIDTH=200 ALIGN=RIGHT><FORM NAME="memberSearch" action="${context}/event/memberSearch/1">'
-		+'<SELECT NAME="column" SIZE=1><OPTION VALUE="" SELECTED>선택</OPTION><OPTION VALUE="id">ID</OPTION>'
-		+'<OPTION VALUE="name">이름</OPTION><OPTION VALUE="gender">성별</OPTION></SELECT>'
-		+'<INPUT TYPE=TEXT NAME="keyword" SIZE=10 MAXLENGTH=20><input type="submit" value="검 색">'
-
-		+'</FORM></TD></TR></TABLE></div>';
+		+'<TR>'
+		+'<TD ALIGN=LEFT WIDTH=100>'
+		+'<IMG SRC="${img}/btn_new.gif" onClick="";STYLE=CURSOR:HAND>'
+		+'</TD>'
+		+'<TD WIDTH=320 ALIGN=CENTER>';
+		
+		+'<c:if test="${startPage ne 1}">'
+		+'<a href="${context}/event/boardList/1">'
+		+'<IMG SRC="${img}/btn_bf_block.gif">&nbsp;'
+		+'</a>'
+		+'</c:if>'
+		+'<c:if test="${startPage - GROUPSIZE gt 0}">'
+		+'<a href="${context}/event/boardList/${startPage-GROUPSIZE}">'
+		+'<IMG SRC="${img}/btn_bf_page.gif">&nbsp;'
+		+'</a>'
+		+'</c:if>';
+		
+		+'<c:forEach begin="${startPage}" end="${lastPage}" step="1" varStatus="status">'
+		+'<c:choose>'
+		+'<c:when test="${status.index == pageNo}">'
+		+'<font style="color:red;font-size: 20px">${status.index}</font>'
+		+'</c:when>'
+		+'<c:otherwise>'
+		+'<a href="${context}/event/boardList/${status.index}">'
+		+'<font>${status.index}</font>'
+		+'</a>'
+		+'</c:otherwise>'
+		+'</c:choose>'
+		+'</c:forEach>'
+		+'<c:if test="${startPage + GROUPSIZE le totPage}">'
+		+'<a href="${context}/event/boardList/${startPage+GROUPSIZE}">'
+		+'<IMG SRC="${img}/btn_nxt_page.gif">&nbsp;'
+		+'</a>'
+		+'</c:if>'
+		+'</TD>';
+		
+		pagination += '<TD WIDTH=200 ALIGN=RIGHT>'
+		+'<FORM NAME="memberSearch" action="${context}/event/memberSearch/1">'
+		+'<SELECT NAME="column" SIZE=1>'
+		+'<OPTION VALUE="" SELECTED>선택</OPTION>'
+		+'<OPTION VALUE="id">ID</OPTION>'
+		+'<OPTION VALUE="name">이름</OPTION>'
+		+'<OPTION VALUE="gender">성별</OPTION>'
+		+'</SELECT>'
+		+'<INPUT TYPE=TEXT NAME="keyword" SIZE=10 MAXLENGTH=20>'
+		+'<input type="submit" value="검 색">'
+		+'</FORM>'
+		+'</TD>'
+		+'</TR>'
+		+'</TABLE>'
+		+'</div>';
 		table += pagination;
 		$('.mainView').html(table);
 	});
