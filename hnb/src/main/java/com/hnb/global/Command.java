@@ -2,12 +2,18 @@ package com.hnb.global;
 
 public class Command implements Orderable{
 	private String column, keyword; 
-	private int pageNo, start, end;
+	private int pageNo, start, end, themeNo;
 	public final int PAGESIZE = 5;
 	public Command(String pageNo) {
 		this.pageNo = Integer.parseInt(pageNo);
 		this.start = (Integer.parseInt(pageNo)-1)*PAGESIZE+1;
 		this.end = (Integer.parseInt(pageNo)*PAGESIZE);
+	}
+	public Command(String pageNo, String themeNo) {
+		this.pageNo = Integer.parseInt(pageNo);
+		this.start = (Integer.parseInt(pageNo)-1)*PAGESIZE+1;
+		this.end = (Integer.parseInt(pageNo)*PAGESIZE);
+		this.themeNo = (Integer.parseInt(themeNo));
 	}
 	public Command(String column, String keyword, String pageNo) {
 		this.column = column;
@@ -46,6 +52,13 @@ public class Command implements Orderable{
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	
+	public int getThemeNo() {
+		return themeNo;
+	}
+	public void setThemeNo(int themeNo) {
+		this.themeNo = themeNo;
 	}
 	@Override
 	public void excute() {

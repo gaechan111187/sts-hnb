@@ -25,3 +25,12 @@ INSERT INTO THEME(THEME_NO,THEME_NAME) VALUES (SEQ.NEXTVAL, '회원관리');	--�
 INSERT INTO THEME(THEME_NO,THEME_NAME) VALUES (SEQ.NEXTVAL, '자유게시판');	--시퀀스 142
 COMMIT
 SELECT * FROM THEME;
+-- GRP_NO 는 원글에 딸린 댓글을 구별하기 위한 값으로
+-- 원글만 존재할 경우는 GRP_NO는 널로 주고
+-- 만약, 댓글이 달리면 그때 원글에 RCD_NO와 동일한 값을 부여하는 것으로 한다.
+-- 이때 댓글도 원글과 GRP_NO는 동일하게 묶는다.
+-- RCD_LEVEL 은 이글이 원글인지, 댓글인지, 대댓글인지를 나타내는 값으로
+-- 원글이면 0, 1단계 댓글이면 1, 2단계 대댓글이면 2 이런 식으로 추가된다.
+-- RCD_ORDER는 댓글이든, 원글이든, 대댓글이든 시간순서대로 보여주는 값.
+INSERT INTO BOARD(RCD_NO,THEME_NO,RCD_LEVEL,RCD_ORDER,USR_SUBJECT,USR_CONTENT)
+VALUES (SEQ.NEXTVAL,142,0,1,'테스트','자유게시판 첫번째 테스트 글입니다.');  --시퀀스 번호 161
