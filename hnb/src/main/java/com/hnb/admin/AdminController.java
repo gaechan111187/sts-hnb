@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hnb.article.ArticleVO;
 import com.hnb.global.CommandFactory;
 import com.hnb.member.MemberServiceImpl;
 import com.hnb.member.MemberVO;
@@ -47,10 +46,19 @@ public class AdminController {
 			Model model){
 		logger.info("AdminController article()");
 		logger.info("넘어온 페이지번호 : {}",pageNo);
+		int pageSize = 5, groupSize = 3, count = memberService.count(), totPage = 0, startPage=0,lastPage = 0;
+		int pageNum = Integer.parseInt(pageNo);
+		totPage = ((count % pageSize) == 0) ? count/pageSize : (count/pageSize)+1;
+		startPage = pageNum - ((pageNum-1)%groupSize);
+		lastPage = ((startPage+groupSize-1) <= totPage) ? (startPage+groupSize)-1 : totPage;
 		Map<String, Object> map= new HashMap<String, Object>();
 		map.put("list", memberService.getList(CommandFactory.list(pageNo)));
-		map.put("count", memberService.count());
+		map.put("count", count);
 		map.put("pageNo",pageNo);
+		map.put("startPage", startPage);
+		map.put("groupSize", groupSize);
+		map.put("lastPage", lastPage);
+		map.put("totPage", totPage);
 		return map;
 	}
 	@RequestMapping("/member_profile")
@@ -75,7 +83,7 @@ public class AdminController {
 	}
 	@RequestMapping("/delete")
 	public String delete(){
-		logger.info("deleete() 진입");
+		logger.info("delete() 진입");
 		return "admin/delete";
 	}
 }

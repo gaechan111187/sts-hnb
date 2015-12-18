@@ -50,22 +50,23 @@
  		FROM MEMBER WHERE ID = #{id}
  	</select>
  	<select id="selectSomeBy" resultType="com.hnb.member.MemberVO" parameterType="com.hnb.global.Command">
- 		SELECT 
- 			ID AS id,
- 			PASSWORD AS password,
- 			NAME AS name,
- 			BIRTH AS birth,
- 			ADDR AS addr,
- 			GENDER AS gender,
- 			EMAIL AS email,
- 			PHONE AS phone,
- 			REGDATE AS regdate,
- 			PROFILE AS profile
- 		FROM (SELECT ROWNUM AS seq, m.* FROM (
- 			SELECT * FROM MEMBER 
- 			WHERE ${column} LIKE '%' || #{keyword} || '%'
- 		) m) 
- 		WHERE seq BETWEEN #{start} AND #{end} 
+ 			SELECT 
+	 	ID AS id,
+	 	PASSWORD AS password,
+	 	NAME AS name,
+	 	BIRTH AS birth,
+	 	GENDER AS gender,
+	 	PHONE AS phone,
+	 	ADDR AS addr,
+	 	EMAIL AS email,
+	 	REGDATE AS regdate,
+	 	PROFILE AS profile
+ 	FROM (SELECT ROWNUM AS seq, m.* FROM (
+ 		SELECT * FROM MEMBER
+ 		WHERE ${column} LIKE '%' || #{keyword} || '%'
+ 	) m) 
+ 	WHERE seq BETWEEN #{start} AND #{end} 
+ 	
  	</select>
  	<select id="count" resultType="int">
  		SELECT COUNT(*) AS count FROM MEMBER

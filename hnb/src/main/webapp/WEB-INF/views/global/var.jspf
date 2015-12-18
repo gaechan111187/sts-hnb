@@ -7,7 +7,9 @@
 <c:set var="js" value="${context}/resources/js"></c:set>
 <c:set var="css" value="${context}/resources/css"></c:set>
 <c:set var="img" value="${context}/resources/images"></c:set>
-<script>var context = '${context}';
+<script>
+	var context = '${context}';
+	var img ='${img}';
 </script>
 
 
