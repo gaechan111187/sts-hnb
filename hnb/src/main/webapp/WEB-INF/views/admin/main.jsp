@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script>
 $(function() {
-	Admin2.memberList(context+'/admin/member_list/1');
+	Admin2.memberList('1');
 });	
  var Admin2 = {
-		 memberList : function(url) {
-				$.getJSON(url,function(data) {
+		 memberList : function(pageNo) {
+				$.getJSON(context+'/admin/member_list/'+pageNo,function(data) {
 					var table = "<div id='boardList'><h1 align=center style='color:white;margin-bottom:30px'>회원목록</h1>"
 					+"<TABLE id='tab_borderList'>"
 					+"<TR ALIGN=CENTER><TD WIDTH=10%><B>번호</B></TD>"
@@ -43,17 +43,17 @@ $(function() {
 						+'<IMG SRC="'+img+'/btn_bf_page.gif">&nbsp;'
 						+'</a>';	
 					}
-					for (var i = startPage; i < lastPage; i++) {
+					for (var i = startPage; i <= lastPage; i++) {
 						if (i==pageNo) {
 							pagination += '<font style="color:red;font-size: 20px">'+i+'</font>';
 						} else {
-							pagination += '<a href="'+context+'/admin/member_list/'+i+'">'
+							pagination += '<a href="#" onclick="return Admin2.memberList('+i+')">'
 							+'<font>'+i+'</font>'
 							+'</a>';
 						}
 					}
 					if ((startPage+groupSize)<= totPage) {
-						pagination += '<a href="'+context+'/admin/member_list/${startPage+GROUPSIZE}">'
+						pagination += '<a href="'+context+'/admin/member_list/'+(startPage+groupSize)+'">'
 						+'<IMG SRC="'+img+'/btn_nxt_page.gif">&nbsp;'
 						+'</a>';
 					}
@@ -77,28 +77,6 @@ $(function() {
 					$('.mainView').html(table);
 				});
 		},
-		 memberList : function(url) {
-		$.getJSON(url,function(data) {
-			var table = "<div id='boardList'><h1 align=center style='color:white;margin-bottom:30px'>회원목록</h1>"
-			+"<TABLE id='tab_borderList'>"
-			+"<TR ALIGN=CENTER><TD WIDTH=10%><B>번호</B></TD>"
-			+"<TD WIDTH=20%><B>아이디</B></TD>"
-			+"<TD WIDTH=20%><B>회원명</B></TD>"
-			+"<TD WIDTH=30%><B>이메일</B></TD>"
-			+"<TD WIDTH=18%><B>가입일</B></TD></TR>";
-			var count = data.count;
-			var pageNo = data.pageNo;
-			$.each(data.list, function(index, value) {
-			table += "<TR><TD WIDTH=10% ALIGN=CENTER>"+(index+1)+"</TD>"
-			+"<TD WIDTH=20% ALIGN=CENTER>"+this.id+"</TD>"
-			+"<TD WIDTH=20% ALIGN=CENTER><A HREF='BoardContent.jsp'>"+this.name+"</A></TD>"
-			+"<TD WIDTH=30% ALIGN=LEFT>"+this.email+"</TD>"
-			+"<TD WIDTH=18% ALIGN=CENTER>"+this.regdate+"</TD></TR>"
-			});
-			table += "</TABLE></div>";
-			$('.mainView').html(table);
-		});
-	},
 	memberNotExist : function() {
 		var table ='<h1>회원목록</h1><table id="tab_member"><tr><th>아이디</th>';
 			table += '<th>이름</th><th>성별</th><th>생년원일</th><th>전화번호</th><th>이메일</th></tr>';

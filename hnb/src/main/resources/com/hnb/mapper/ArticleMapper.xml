@@ -9,11 +9,21 @@
 	<select id="getList" resultType="com.hnb.article.ArticleVO" parameterType="com.hnb.article.ArticleVO">
 	   	SELECT 
 	   		RCD_NO AS rcdNo,
-	   		USR_SUBJECT AS usrSubject,
+	   		GRP_NO AS grpNO,
+	   		THEME_NO AS themeNo,
 	   		USR_NAME AS usrName,
+	   		USR_MAIL AS usrMail,
+	   		USR_SUBJECT AS usrSubject,
+	   		USR_CONTENT AS usrContent,
+	   		USR_PASS AS usrPass,
+	   		USR_FILE_NAME AS usrFileName,
+	   		USR_FILE_SIZE AS usrFileSize,
 	   		USR_DATE AS usrDate,
-	   		USR_REFER AS usrRefer
-   		FROM BOARD ORDER BY RCD_NO DESC
+	   		USR_REFER AS usrRefer,
+	   		RCD_LEVEL AS rcdLevel,
+	   		RCD_ORDER AS rcdOrder
+   		FROM BOARD 
+   		WHERE THEME_NO = #{themeNo}
 	</select>
 	<select id="count2">
 		SELECT COUNT(RCD_NO) FROM BOARD 

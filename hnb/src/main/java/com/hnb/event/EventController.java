@@ -28,31 +28,7 @@ public class EventController {
 	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 	@Autowired MemberVO member;
 	@Autowired MemberServiceImpl memberService;
-	@Autowired ArticleVO article;
-	@Autowired ArticleServiceImpl articleService;
-	
-	// RESTful 방식 (url 에 {} 이 있어서 @PathVariable 사용한 경우)
-	@RequestMapping("/boardList/{pageNo}")
-	public @ResponseBody Map boardList(
-			@PathVariable("pageNo")String pageNo,
-			Model model){
-		logger.info("EventController article()");
-		logger.info("넘어온 페이지번호 : {}",pageNo);
-		List<ArticleVO> list = articleService.getList(CommandFactory.list(pageNo));
-		Map result = new HashMap();
-		int count = articleService.count();
-		result.put("count", count);
-		result.put("list", list);
-		/*		model.addAttribute("memberList",list);
-		model.addAttribute("count", service.count());
-		model.addAttribute("pageNo",pageNo);*/
-		return result;
-	}
-	@RequestMapping("/boardList")
-	public String goList(){
-		logger.info("EventController article()");
-		return "event/boardList.tiles";
-	}
+
 	@RequestMapping("/memberSearch/{pageNo}")
 	public String memberSearch(
 			@PathVariable("pageNo")String pageNo,

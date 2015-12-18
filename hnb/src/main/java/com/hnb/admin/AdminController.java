@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hnb.article.ArticleServiceImpl;
+import com.hnb.article.ArticleVO;
 import com.hnb.global.CommandFactory;
 import com.hnb.member.MemberServiceImpl;
 import com.hnb.member.MemberVO;
@@ -28,6 +30,7 @@ public class AdminController {
 	@Autowired MovieServiceImpl movieService;
 	@Autowired MemberVO member;
 	@Autowired MovieVO movie;
+	
 	@RequestMapping("/main")
 	public String home(){
 		logger.info("AdminController-home() 진입");
