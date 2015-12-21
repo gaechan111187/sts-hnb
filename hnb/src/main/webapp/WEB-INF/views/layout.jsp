@@ -5,8 +5,10 @@
 	<meta charset="UTF-8" />
 	<title>한빛포트폴리오</title>
 	<link rel="stylesheet" href="${css}/common.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+	
 </head>
 <body>
 	<div id="wrap">
