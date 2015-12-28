@@ -115,6 +115,29 @@ public class MemberController {
 		
 		return member;
 	}
+	
+	@RequestMapping(value="/login")
+	public Model loginForMobile(Model model,
+			@RequestParam("id")String id,
+			@RequestParam("password")String password){
+		logger.info("멤버컨트롤러 loginForMobile() - 진입");
+		logger.info("넘어온 유저아이디 : {}",id);
+		logger.info("유저비번 : {}",password);
+		member = service.login(id, password);
+		model.addAttribute("user", member);
+		
+		String u = member.getId();
+		logger.info("로그인 과정에서 체크하는 아이디 : {}",u);
+		if (member.getId().equals(id)) {
+			logger.info("로그인성공");
+			model.addAttribute("result","success");
+		} else {
+			logger.info("로그인실패");
+			model.addAttribute("result","fail");
+		}
+		
+		return model;
+	}
 	@RequestMapping("/check_Overlap")
 	public Model checkOverlap(
 			String id,
