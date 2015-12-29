@@ -6,6 +6,9 @@ import com.hnb.ticket.TicketVO;
 
 
 public interface TicketMapper {
+	
+	public List<?> getSeatList(String theater, String room);
+	
 	// C
 	public int insert(TicketVO o);
 	

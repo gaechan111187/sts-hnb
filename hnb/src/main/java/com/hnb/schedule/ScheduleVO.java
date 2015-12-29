@@ -1,4 +1,4 @@
-package com.hnb.ticket;
+package com.hnb.schedule;
 
 import org.springframework.stereotype.Component;
 
